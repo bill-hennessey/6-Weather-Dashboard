@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Weather Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand">Weather Dashboard</a>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search by city"
+              aria-label="Search"
+              id="searchCity"
+            />
+            
+            <button class="btn btn-outline-success" type="submit" id="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div id="jumbo" class="container-fluid py-5">
+          <h1 class="display-5 fw-bold">
+            <span id="cityMain">Your City</span>
+          </h1>
+          <h3><span id="date"></span></h3>
+          <p class="col-md-8 fs-4">
+            <p id="mainTemp"><span id="mainTempValue"></span></p>
+            <p id="mainWind"><span id="mainWindValue"></span></p>
+            <p id="mainHumidity"><span id="mainHumValue"></span></p>
+            <p id="mainUV"><span id="mainUVValue"></span></p>
+          </p>
+          
+        </div>
+      </div>
+      <div id="fiveDay" class="container-fluid">
+        <h3>5 Day Forcast</h3>
+      <div class="row">
+        <div id="d1" class="col">
+          <h4 id="d1Date"></h4>
+          <img id="d1img" src="" alt="">
+          <p id="d1temp">Temperature</p>
+          <p id="d1wind">Wind</p>
+          <p id="d1hum">Humidity</p>
+        </div>
+        <div id="d2" class="col"><h4 id="d2Date"></h4>
+          <img id="d2img" src="" alt="">
+          <p id="d2temp">Temperature</p>
+          <p id="d2wind">Wind</p>
+          <p id="d2hum">Humidity</p></div>
+        <div id="d3" class="col"><h4 id="d3Date"></h4>
+          <img id="d3img" src="" alt="">
+          <p id="d3temp">Temperature</p>
+          <p id="d3wind">Wind</p>
+          <p id="d3hum">Humidity</p></div>
+        <div id="d4" class="col"><h4 id="d4Date"></h4>
+          <img id="d4img" src="" alt="">
+          <p id="d4temp">Temperature</p>
+          <p id="d4wind">Wind</p>
+          <p id="d4hum">Humidity</p></div>
+        <div id="d5" class="col"><h4 id="d5Date"></h4>
+          <img id="d5img" src="" alt="">
+          <p id="d5temp">Temperature</p>
+          <p id="d5wind">Wind</p>
+          <p id="d5hum">Humidity</p></div>
+      </div>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.6/dayjs.min.js"
+      integrity="sha512-bwD3VD/j6ypSSnyjuaURidZksoVx3L1RPvTkleC48SbHCZsemT3VKMD39KknPnH728LLXVMTisESIBOAb5/W0Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
+  </body>
+  <footer>
+    <h5>©2021 Bill Hennessey Productions</h5>
+  </footer>
+</html>
