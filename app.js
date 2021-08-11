@@ -1,5 +1,6 @@
 console.log("Hi there.");
 
+// formatiing and populating todays date
 var todaysDate = moment().format("dddd MMMM Do, YYYY");
 
 $("#date").text(todaysDate);
@@ -24,17 +25,20 @@ function getCity() {
 
     // send the string array to localstorage
     localStorage.setItem("history", savedCities);
-  } else if (savedCities.length < 6) {
-    var savedCities = localStorage.getItem("history");
-    JSON.parse(savedCities);
-
-    savedCities.unshift(city);
-
-    localStorage.setItem("history", JSON.stringify(savedCities));
-  } else {
-    return;
   }
 
+  // else if (savedCities.length < 6) {
+  //   var savedCities = localStorage.getItem("history");
+  //   JSON.parse(savedCities);
+
+  //   savedCities.unshift(city);
+
+  //   localStorage.setItem("history", JSON.stringify(savedCities));
+  // } else {
+  //   return;
+  // }
+
+  // places search query into the main city text
   var cityMain = $("#cityMain").text(city);
 
   var queryURL =
@@ -50,14 +54,15 @@ function getCity() {
     "&units=imperial&appid=" +
     APIKey;
 
+  // first ajax call for current weather
   $.ajax({
     url: queryURL,
     method: "GET",
   }).then(function (data1) {
     console.log(data1);
 
-    // alert("this is working");
-    //   dynamically create html elements
+    // applying gathered temp, wind, and humidity
+    // **** UV index is depracated as of 4/1/21 *****
     var mainTemp = $("#mainTempValue");
     mainTemp.text("Temperature: " + Math.floor(data1.main.temp) + " degrees F");
 
@@ -67,22 +72,21 @@ function getCity() {
     var mainHumidity = $("#mainHumValue");
     mainHumidity.text("Humidity: " + data1.main.humidity + "%");
 
-    // var mainUV = $("#mainUValue");
-    // mainUV.text("UV Index: " + data.main.uvi);
-
+    // second ajax call for 5 day forcast
     $.ajax({
       url: queryURL5D,
       method: "GET",
     }).then(function (data5) {
       console.log(data5);
 
+      // grab the icon from the 5 day forcast data and place it in the corresponding div
       function setIcon(day) {
         var iconCode = data5.list[day].weather[0].icon;
         var iconURL =
           "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
         return iconURL;
       }
-
+      // function to apply all temp, wind and humidity to the 5 divs
       function set5DayWeather(dayArray, day) {
         var temp = Math.floor(data5.list[dayArray].main.temp_max);
         $("#d" + day + "temp").text("Temperature: " + temp + " degrees F");
@@ -93,6 +97,7 @@ function getCity() {
         $("#d" + day + "hum").text("Humidity: " + humidity + "%");
       }
 
+      // calling the functions and args to grab the correct data from the 5 day data
       set5DayWeather(5, 1);
       set5DayWeather(13, 2);
       set5DayWeather(21, 3);
@@ -107,7 +112,7 @@ function getCity() {
     });
   });
 }
-
+// setting correct dates in the 5D
 function changeClock(n) {
   var addDays = moment().add(n, "d");
   var cleanup = addDays.format("MM/DD/YYYY");
@@ -121,4 +126,5 @@ var d3Date = $("#d3Date").text(changeClock(3));
 var d4Date = $("#d4Date").text(changeClock(4));
 var d5Date = $("#d5Date").text(changeClock(5));
 
+// event handler for the submit button which runs the main getCity function
 $("#submit").on("click", getCity);
