@@ -5,25 +5,35 @@ var todaysDate = moment().format("dddd MMMM Do, YYYY");
 $("#date").text(todaysDate);
 
 var APIKey = "28674e263c38beb7ce19d2d42c6354dd";
-var city = "denver";
-
-// $(document).ready(function () {
-//   // var city = $("#queryCity").val();
-//   // retrieve the input city
-//   // function getCity() {
-//   //   console.log("in");
-//   //   e.preventDefault();
-//   // $("#submit").on("submit", getCity);
-// });
 
 function getCity() {
   event.preventDefault();
   var searchCity = $("#searchCity").val();
-  var city = searchCity.toLowerCase();
 
-  // function capitalizeFirstLetter(city) {
-  //   return city.charAt(0).toUpperCase() + string.slice(1);
-  // }
+  var city = searchCity.toLowerCase();
+  var savedCities = localStorage.getItem("history");
+
+  if (savedCities === null) {
+    // create the array
+    savedCities = [];
+    // add to the array
+    savedCities.unshift(city);
+
+    // make the array a JSON string
+    JSON.stringify(savedCities);
+
+    // send the string array to localstorage
+    localStorage.setItem("history", savedCities);
+  } else if (savedCities.length < 6) {
+    var savedCities = localStorage.getItem("history");
+    JSON.parse(savedCities);
+
+    savedCities.unshift(city);
+
+    localStorage.setItem("history", JSON.stringify(savedCities));
+  } else {
+    return;
+  }
 
   var cityMain = $("#cityMain").text(city);
 
@@ -83,17 +93,17 @@ function getCity() {
         $("#d" + day + "hum").text("Humidity: " + humidity + "%");
       }
 
-      set5DayWeather(2, 1);
-      set5DayWeather(10, 2);
-      set5DayWeather(18, 3);
-      set5DayWeather(26, 4);
-      set5DayWeather(34, 5);
+      set5DayWeather(5, 1);
+      set5DayWeather(13, 2);
+      set5DayWeather(21, 3);
+      set5DayWeather(29, 4);
+      set5DayWeather(37, 5);
 
-      $("#d1img").attr("src", setIcon(2));
-      $("#d2img").attr("src", setIcon(10));
-      $("#d3img").attr("src", setIcon(18));
-      $("#d4img").attr("src", setIcon(26));
-      $("#d5img").attr("src", setIcon(34));
+      $("#d1img").attr("src", setIcon(5));
+      $("#d2img").attr("src", setIcon(13));
+      $("#d3img").attr("src", setIcon(21));
+      $("#d4img").attr("src", setIcon(29));
+      $("#d5img").attr("src", setIcon(37));
     });
   });
 }
@@ -111,9 +121,4 @@ var d3Date = $("#d3Date").text(changeClock(3));
 var d4Date = $("#d4Date").text(changeClock(4));
 var d5Date = $("#d5Date").text(changeClock(5));
 
-// $("#submit").on("click", getCity);
-
-var submit = document.getElementById("submit");
-submit.addEventListener("click", getCity);
-
-// getCity();
+$("#submit").on("click", getCity);
