@@ -4,6 +4,12 @@
 
 This weather app is a useful tool to see current weather and a five day forcast of a city you search for. It pulls live data from openweathermap api and stores your search history in local storage.
 
+===>I need to note that although UV index was a requirement, openweathermap has deprecated it:
+
+https://openweathermap.org/api/uvi
+
+===>I am also seeing a mixed content error when the page loads from github. From what I read it has to do with openweathermap free version api using http vs github https. When loaded locally you'll find the data loads without issue.
+
 ## Installation
 
 Nothing to install. Simply visit my github page:

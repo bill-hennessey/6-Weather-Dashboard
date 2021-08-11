@@ -1,6 +1,6 @@
 console.log("Hi there.");
 
-// formatiing and populating todays date
+// formating and populating todays date
 var todaysDate = moment().format("dddd MMMM Do, YYYY");
 
 $("#date").text(todaysDate);
